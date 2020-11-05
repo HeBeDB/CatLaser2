@@ -14,13 +14,13 @@ To install run the following commands on the Pi:
     sudo apt-get install -y build-essential git libjpeg62-turbo-dev
     cd ~
     git clone https://github.com/jacksonliam/mjpg-streamer.git
-    cd mjpeg-streamer
-    cd mjpeg-streamer-experimental
+    cd mjpg_streamer
+    cd mjpg_streamer-experimental
     make
     sudo make install
 
 You can then run the tool manually with the following command in the same
-mjpeg-streamer-experimental directory:
+mjpg_streamer-experimental directory:
 
     LD_LIBRARY_PATH=. ./mjpg_streamer -i "./input_raspicam.so -vf -fps 30" -o "./output_http.so -w ./www"
 
@@ -36,12 +36,12 @@ Or to access the stream directly (like to embed in a webpage) access: http://ras
 
 ## systemd Service
 
-Finally to make the mjpeg-streamer tool always run when the Pi boots you can create
-and use a small systemd service.  The included mjpeg-streamer.service file is this
+Finally to make the mjpg_streamer tool always run when the Pi boots you can create
+and use a small systemd service.  The included mjpg_streamer.service file is this
 systemd service and you can install it by running the following commands from inside
 the same directory as this README.md file.
 
-First you will want to replace the start.sh shell script included with mjpeg-streamer
+First you will want to replace the start.sh shell script included with mjpg_streamer
 with a simpler script that uses the Pi camera plugin (just like manually running it
 above).  The included start.sh file can be used to replace the script by running:
 
@@ -53,7 +53,7 @@ vertical flip option, FPS, etc) be sure to change the start.sh script appropriat
 
 Then copy the systemd service to the location of all services by running:
 
-    sudo cp mjpeg-streamer.service /lib/systemd/services/
+    sudo cp mjpg_streamer.service /lib/systemd/services/
 
 Now have systemd reload its services by running:
 
@@ -61,20 +61,20 @@ Now have systemd reload its services by running:
 
 And enable the new service so it starts on boot by running:
 
-    sudo systemctl enable mjpeg-streamer.service
+    sudo systemctl enable mjpg_streamer.service
 
 Finally you can manually start the service by running:
 
-    sudo systemctl start mjpeg-streamer.service
+    sudo systemctl start mjeg_streamer.service
 
 You can check the status of the service with the command:
 
-    sudo systemctl status mjpeg-streamer.service
+    sudo systemctl status mjpg_streamer.service
 
 You should see the service is up and running without any errors.  If there are errors
 carefully check the start.sh shell script is in the right location (the _exact_ path
 specified in the copy command above) and it has the right options to invoke the Pi
 camera plugin (try running the shell script yourself to confirm).
 
-Now whenever the Pi boots the mjpeg-streamer service should automatically run and
+Now whenever the Pi boots the mjpg_streamer service should automatically run and
 start serving video of the Pi camera.
